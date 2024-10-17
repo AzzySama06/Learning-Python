@@ -1,0 +1,23 @@
+class Pessoa:
+    def __init__(self, nome='', idade=0, profissao=''):
+        self.nome = nome
+        self.idade = idade
+        self.profissao = profissao
+
+    def __str__(self):
+        return f'seu nome é {self.nome}, você tem {self.idade} e sua profissão é {self.profissao}.'
+    
+
+    def aniversario(self):
+        self.idade += 1
+
+    @property
+    def saudacao(self):
+        if self.profissao == 'Programador' or 'programador':
+            return f'Olá, {self.nome}! Pronto para codar algo hoje?'
+        elif self.profissao == 'Médico' or 'médico' or 'medico':
+            return f'Dr. {self.nome}, como estão seus pacientes hoje?'
+        elif self.profissao == 'Professor' or 'professor':
+            return f'Bom dia, Professor {self.nome}! Está pronto para ensinar algo novo?'
+        else:
+            return f'Olá, {self.nome}! Como está o seu dia de trabalho como {self.profissao}?'
