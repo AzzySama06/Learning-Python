@@ -5,7 +5,7 @@ class Pessoa:
         self.profissao = profissao
 
     def __str__(self):
-        return f'seu nome é {self.nome}, você tem {self.idade} e sua profissão é {self.profissao}.'
+        return f'nome: {self.nome}\nidade: {self.idade} \nprofissão: {self.profissao}.\n'
     
 
     def aniversario(self):
@@ -21,3 +21,20 @@ class Pessoa:
             return f'Bom dia, Professor {self.nome}! Está pronto para ensinar algo novo?'
         else:
             return f'Olá, {self.nome}! Como está o seu dia de trabalho como {self.profissao}?'
+
+
+pessoa1 = Pessoa(nome='Felipe', idade=19, profissao='Programador')
+pessoa2 = Pessoa(nome='Luiza', idade=30, profissao='Professora')
+pessoa3 = Pessoa(nome='Jaque', idade=22)
+
+print(pessoa1)
+print(pessoa2)
+print(pessoa3)
+
+pessoa1.aniversario()
+
+
+print('informação depois do aniversario:')
+print(pessoa1)
+
+print(pessoa1.saudacao)
