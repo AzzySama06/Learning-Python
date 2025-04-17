@@ -1,0 +1,67 @@
+import sqlite3
+
+def conectar():
+    return sqlite3.connect("filmes.db")
+
+def adicionar_filme():
+    titulo = input("Título do filme: ")
+    ano = input("Ano de lançamento: ")
+    genero = input("Gênero: ")
+
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO filmes (titulo, ano, genero) VALUES (?, ?, ?)",
+                   (titulo, ano, genero))
+    conn.commit()
+    conn.close()
+    print("✅ Filme adicionado com sucesso!")
+
+def listar_filmes():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM filmes")
+    filmes = cursor.fetchall()
+    conn.close()
+
+    print("\n🎬 Lista de Filmes:")
+    for filme in filmes:
+        print(f"ID: {filme[0]} | Título: {filme[1]} | Ano: {filme[2]} | Gênero: {filme[3]}")
+    print()
+
+def buscar_por_genero():
+    genero = input("Digite o gênero para buscar: ")
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM filmes WHERE genero LIKE ?", (f"%{genero}%",))
+    filmes = cursor.fetchall()
+    conn.close()
+
+    print("\n🔎 Resultados:")
+    for filme in filmes:
+        print(f"{filme[1]} ({filme[2]}) - Gênero: {filme[3]}")
+    print()
+
+def menu():
+    while True:
+        print("\n📽️  Menu:")
+        print("1. Adicionar filme")
+        print("2. Listar filmes")
+        print("3. Buscar por gênero")
+        print("0. Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            adicionar_filme()
+        elif opcao == "2":
+            listar_filmes()
+        elif opcao == "3":
+            buscar_por_genero()
+        elif opcao == "0":
+            print("👋 Saindo...")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    menu()
